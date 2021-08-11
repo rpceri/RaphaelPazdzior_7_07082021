@@ -1,0 +1,20 @@
+*,
+*::after,
+*::before { // :: = pseudo-élément = un mot-clé ajouté à un sélecteur qui permet de mettre en forme certaines parties de l'élément ciblé par la règle
+    margin: 0;
+    padding: 0;
+   /* box-sizing: inherit;*/
+}
+
+body {
+   /* box-sizing: border-box;
+    background: $colour-secondary;*/
+    margin:0 100;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+b {font-weight: bold;}

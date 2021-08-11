@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+   <head>
+       <meta charset="utf-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1">
+       <title>Les petits plats</title>       
+       <link href="./sass/main.css" type="text/css" rel="stylesheet" media="all" />
+       <script src="https://kit.fontawesome.com/9e4ba8dd9b.js" crossorigin="anonymous"></script> <!-- pour les pictos  -->
+   </head>
+   <body>
+      <div class="conteneur-principal">
+        <header class="header">
+          <img src="./medias/logo.png" alt="Les petits plats" class="header__img" />
+        </header>
+        <main>
+          <!-- zone de recherche principale-->
+          <section class="recherche">
+            <form class="recherche__input" id="form">
+              <input type="text" id="rechercheInput" aria-label="Rechercher un ingrédient, appareil, ustensile ou une recette" placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette" />
+              <i class="fas fa-search"></i>
+            </form>
+          </section>
+          <!-- partie qui contiendra les tags choisis dans les filtres-->
+          <section class="recherche__tags">
+            <div class="recherche__tags__ingredients"></div>
+            <div class="recherche__tags__appareils"></div>
+            <div class="recherche__tags__ustenciles"></div>
+          </section>
+          <!-- partie qui contiendra les filtres-->
+          <section class="recherche__filtre"></section>
+          <!-- partie qui contiendra la liste des recettes trouvées apr le moteur (balises article)-->
+          <section class="resultat" id="resultat"></section>
+        </main>
+      </div>
+   </body>
+</html>
