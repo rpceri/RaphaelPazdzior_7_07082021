@@ -81,3 +81,32 @@
 
 
 
+  const rechercheInput = document.querySelector('#rechercheInput');
+
+  
+  var inputSansCarSpeciaux = '';
+
+  // on inhibe la saisie de la touche entrée
+  rechercheInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') e.preventDefault();
+  });
+
+  // écouteur saisie sur la zone de saisie
+  rechercheInput.addEventListener('input', (e) => { //keypress ne suffit pas car ca ne se déclecnhe pas lors de l'appui sur la touche suppr
+    const input = e.target.value;
+    inputSansCarSpeciaux = remplaceCarSpeciaux(input); // suppr des accents et autres signes diacritiques génériques 
+
+
+  
+    if (inputSansCarSpeciaux.length > 2) { // on verifie si plus de 2 lettres ont été saisies
+      globalrecherche = rechercheCroisee(); // lancement fct qui effectue la recherche
+      if (globalrecherche.length < 1) { // si aucun resultat
+        resultatSection.innerHTML = `<p class='erreur-resultat'>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc. .</p>`;
+
+      } else {
+        resultatSection.innerHTML = retourneBalisesArticlesContenantRecettesTriees(globalrecherche); // trie des recettes par ordre alpha et retourne autant de balise <article que nécessaire
+      }
+    } else { // si moins de 3 lettres saisies....
+      resultatSection.innerHTML = retourneBalisesArticlesContenantRecettesTriees(recipes); // trie des recettes par ordre alpha et retourne autant de balise <article que nécessaire
+    }
+  });
