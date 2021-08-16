@@ -47,6 +47,7 @@ rechercheCroisee = () => {
 
   //suppr des doublons :
   const resultatRechercheConcateneeGroupees = [...new Set(resultatRechercheConcatenee)];  //L'objet Set (Ensemble en fr) permet de stocker des valeurs uniques, de n'importe quel type, que ce soit des valeurs d'un type primitif ou des objets.
+  return resultatRechercheConcateneeGroupees.sort();// retourne un tableau d'objet des recettes qui matchent, trié par ordre alpha
   // nb : Set converti un tableau en ensemble, le fait de mettre .... fait la manip inverse (conversion  de l'ensemble en tableau)
   return resultatRechercheConcatenee.sort();// retourne un tableau d'objet des recettes qui matchent, trié par ordre alpha
 } // rechercheCroisee

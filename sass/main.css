@@ -179,32 +179,6 @@ input:focus {
   width: 100%;
 }
 
-.recherche__tags {
-  height: auto;
-  margin-top: 1rem;
-}
-
-.recherche__tags__ingredients, .recherche__tags__appareils, .recherche__tags__ustenciles {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.recherche__tags__item {
-  margin-top: 1rem;
-  border-radius: 3px;
-  padding: 0.2rem 0.8rem;
-  color: #FFFFFF;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
-}
-
 .recherche__filtre {
   display: -webkit-box;
   display: -ms-flexbox;
