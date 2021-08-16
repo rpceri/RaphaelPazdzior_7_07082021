@@ -1,4 +1,17 @@
-  // utilisée par retourneBalisesArticlesContenantRecettesTriees et recherche.inc
+retourneBlocHtmlConteneurFiltre = (string) => {
+  console.log('retourneBlocHtmlConteneurFiltre')
+  return `
+  <div class=conteneur-filtre-${string}>
+    <div class="recherche__filtre__element ${string}">
+        <span class="recherche__filtre__label" id="currentFilter">${string}</span>
+        <input id="${string}Input" type="text" class="recherche__filtre__input ${string}" placeholder="${string}" />
+        <div class="bt-affiche-ou-masque"></div>
+    </div>
+    <ul id="list${string}" class="recherche__filtre__list ${string}"></ul>
+  </div>`;
+}
+
+// utilisée par retourneBalisesArticlesContenantRecettesTriees et recherche.inc
    // suppr des accents et autres signes diacritiques génériques (https://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode/U0300)
   remplaceCarSpeciaux = (str) => {
     if(str.length > 0) {
@@ -9,6 +22,31 @@
     } else return '';
   }
 
+  // uitlisée par recherche.inc
+  // on va faire un taebleau d'ingrédient idem a l'original, auquel on normalise les entrée pour les comparer,
+  // si on trouve ensuit des termes emblables, on mémorise les indices pour pouvoir ensuite les supprimer du tableau original avant de le retourner
+  SupprDoublonDunArray = (array) => {
+    const arrayNormalise =  array.map((element) => remplaceCarSpeciaux(element));
+    let tabIndicesASuppr = [];
+    
+    for (const posIndex in arrayNormalise) {
+      for (const posIndex2 in arrayNormalise) { // seconde boucle qui permet de comparer l'élément courant avec tout les suivants
+        // verifie si l'élément courant du 1er tableau n'a pas déjà été traité (auquel cas il est vide), auqel cas on vérifie si l'element courant du 2d tabelau n'est pas sembllable, à partir de l'indice au dessus
+        if(arrayNormalise[posIndex] != '' && posIndex2 > posIndex &&  arrayNormalise[posIndex] ==  arrayNormalise[posIndex2]) {
+          //console.log(`${arrayNormalise[posIndex]} premier occ @ ${posIndex} trouvé @ ${posIndex2}`);
+          tabIndicesASuppr.push(posIndex2);
+          arrayNormalise[posIndex2] = ''; // pour que la première boucle n'y repasse pas dessus inutilement
+        }
+      }
+    }
+    // on construit le taeblau final a partir de l'original, en écartant les éléments dont les index ont été retenus car en doublon
+    let tabFinal = []
+    for (const posIndex3 in array) {
+      if (tabIndicesASuppr.indexOf(posIndex3) === -1) tabFinal.push(array[posIndex3]);
+    }
+
+    return tabFinal;
+  }
 
   abregUnits = (str) => {
     return str.replace('grammes', 'gr');
@@ -74,6 +112,12 @@
   //console.log(recipes) //tableau contenant un objet par recette = contenue de recpies.js
 
 
+  // affichage des filtres de recherche
+  const rechercheFilter = document.querySelector('.recherche__filtre'); // bloc contenant tous les filtres
+  rechercheFilter.insertAdjacentHTML('beforeend', retourneBlocHtmlConteneurFiltre('ingredients')); //beforeend : Juste à l'intérieur de l'element , après son dernier enfant,  afterbegin aurait pu fctionner aussi
+  rechercheFilter.insertAdjacentHTML('beforeend', retourneBlocHtmlConteneurFiltre('appareils'));
+  rechercheFilter.insertAdjacentHTML('beforeend', retourneBlocHtmlConteneurFiltre('ustenciles'));
+
 
   // affichage des recettes
   const resultatSection = document.querySelector('.resultat'); // sert plus en dessous de ce script
@@ -85,6 +129,7 @@
 
   
   var inputSansCarSpeciaux = '';
+  var globalrecherche= recipes; // tabelau de "recipes" issue de filtre  (rechercheCroisee, rechercheIngredient) , contient toutes les recettes matchant les filtre (= tout au premier chargement)
 
   // on inhibe la saisie de la touche entrée
   rechercheInput.addEventListener('keydown', (e) => {
@@ -110,3 +155,8 @@
       resultatSection.innerHTML = retourneBalisesArticlesContenantRecettesTriees(recipes); // trie des recettes par ordre alpha et retourne autant de balise <article que nécessaire
     }
   });
+
+    // au chargement de la page, on rempli les 3 filtres avec toutes les occurences possibles :
+    GereBlocHtmlUnFiltre(globalrecherche.flatMap((element) => element.ingredients), 'ingredient', '', 'ingredients'); // permet d'appliquer une fonction à chaque élément du tableau puis d'aplatir le résultat en un tableau
+    GereBlocHtmlUnFiltre(globalrecherche, 'appliance', '', 'appareils');
+    GereBlocHtmlUnFiltre(globalrecherche, 'ustensils', '', 'ustenciles');

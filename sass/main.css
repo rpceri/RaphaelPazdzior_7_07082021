@@ -236,8 +236,6 @@ input:focus {
   color: #FFFFFF;
   height: 5rem;
   border-radius: 3px;
-  -webkit-transition: width 0.1s ease;
-  transition: width 0.1s ease;
 }
 
 .recherche__filtre__element:hover, .recherche__filtre__element:focus {
@@ -305,8 +303,6 @@ input:focus {
   border-radius: 0 0 3px 3px;
   padding: 1rem 1rem;
   top: 100%;
-  -webkit-transition: all 0.1s;
-  transition: all 0.1s;
   opacity: 0;
   visibility: hidden;
   z-index: 2;
@@ -320,8 +316,6 @@ input:focus {
   display: block;
   color: #FFFFFF;
   text-align: left;
-  -webkit-transition: all 0.1s;
-  transition: all 0.1s;
 }
 
 .recherche__filtre__list__item:hover {
@@ -337,6 +331,83 @@ input:focus {
   color: #FFFFFF;
   cursor: default;
   list-style: none;
+}
+
+.conteneur-filtre-ingredients, .conteneur-filtre-appareils, .conteneur-filtre-ustenciles {
+  width: auto;
+}
+
+.larger {
+  width: 40%;
+  margin-right: 1rem;
+}
+
+.recherche__filtre__element.visible ~ .recherche__filtre__list {
+  opacity: 1;
+  visibility: visible;
+  width: 40%;
+}
+
+.recherche__filtre__element.visible > .recherche__filtre__input {
+  opacity: 1;
+  visibility: visible;
+  width: 100%;
+}
+
+.recherche__filtre__element.visible > .recherche__filtre__input::-webkit-input-placeholder {
+  text-transform: capitalize;
+}
+
+.recherche__filtre__element.visible > .recherche__filtre__input:-ms-input-placeholder {
+  text-transform: capitalize;
+}
+
+.recherche__filtre__element.visible > .recherche__filtre__input::-ms-input-placeholder {
+  text-transform: capitalize;
+}
+
+.recherche__filtre__element.visible > .recherche__filtre__input::placeholder {
+  text-transform: capitalize;
+}
+
+.recherche__filtre__element.visible > .recherche__filtre__label {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+}
+
+.recherche__filtre__element.visible > .bt-affiche-ou-masque {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  right: 1rem;
+  margin-left: 1rem;
+}
+
+.fas.fa-search {
+  font-size: 2rem;
+  position: relative;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  right: 4rem;
+}
+
+.far.fa-times-circle {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.ingredients {
+  background-color: #3282f7;
+}
+
+.appareils {
+  background-color: #68d9a4;
+}
+
+.ustenciles {
+  background-color: #ed6454;
 }
 
 .resultat {
@@ -371,32 +442,6 @@ input:focus {
   bottom: 0px;
   width: 0.15rem;
   height: 100%;
-}
-
-.bt-affiche-ou-masque::after {
-  left: -2.5px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-  background-color: #FFFFFF;
-}
-
-.bt-affiche-ou-masque::before {
-  left: 4.5px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  background-color: #FFFFFF;
-}
-
-.visible .bt-affiche-ou-masque::after {
-  left: -2.5px;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-.visible .bt-affiche-ou-masque::before {
-  left: 4.5px;
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
 }
 
 .fiche-recette {
