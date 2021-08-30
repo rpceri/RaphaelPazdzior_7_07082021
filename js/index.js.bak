@@ -1,17 +1,17 @@
-  retourneBlocHtmlConteneurFiltre = (string) => {
-    console.log('retourneBlocHtmlConteneurFiltre')
-    return `
-    <div class=conteneur-filtre-${string}>
-      <div class="recherche__filtre__element ${string}">
-          <span class="recherche__filtre__label" id="currentFilter">${string}</span>
-          <input id="${string}Input" type="text" class="recherche__filtre__input ${string}" placeholder="${string}" />
-          <div class="bt-affiche-ou-masque"></div>
-      </div>
-      <ul id="list${string}" class="recherche__filtre__list ${string}"></ul>
-    </div>`;
-  }
+retourneBlocHtmlConteneurFiltre = (string) => {
+  console.log('retourneBlocHtmlConteneurFiltre')
+  return `
+  <div class=conteneur-filtre-${string}>
+    <div class="recherche__filtre__element ${string}">
+        <span class="recherche__filtre__label" id="currentFilter">${string}</span>
+        <input id="${string}Input" type="text" class="recherche__filtre__input ${string}" placeholder="${string}" />
+        <div class="bt-affiche-ou-masque"></div>
+    </div>
+    <ul id="list${string}" class="recherche__filtre__list ${string}"></ul>
+  </div>`;
+}
 
-  // utilisée par retourneBalisesArticlesContenantRecettesTriees et recherche.inc
+// utilisée par retourneBalisesArticlesContenantRecettesTriees et recherche.inc
    // suppr des accents et autres signes diacritiques génériques (https://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode/U0300)
   remplaceCarSpeciaux = (str) => {
     if(str.length > 0) {
@@ -111,11 +111,13 @@
   });
   //console.log(recipes) //tableau contenant un objet par recette = contenue de recpies.js
 
+
   // affichage des filtres de recherche
   const rechercheFilter = document.querySelector('.recherche__filtre'); // bloc contenant tous les filtres
   rechercheFilter.insertAdjacentHTML('beforeend', retourneBlocHtmlConteneurFiltre('ingredients')); //beforeend : Juste à l'intérieur de l'element , après son dernier enfant,  afterbegin aurait pu fctionner aussi
   rechercheFilter.insertAdjacentHTML('beforeend', retourneBlocHtmlConteneurFiltre('appareils'));
   rechercheFilter.insertAdjacentHTML('beforeend', retourneBlocHtmlConteneurFiltre('ustenciles'));
+
 
   // affichage des recettes
   const resultatSection = document.querySelector('.resultat'); // sert plus en dessous de ce script
@@ -124,20 +126,11 @@
 
 
   const rechercheInput = document.querySelector('#rechercheInput');
- 
-  const tagSection = document.querySelector('.recherche__tags__ingredients');
-  const listIngredient = document.querySelector('.recherche__filtre__list.ingredients');
-  const listAppliance = document.querySelector('.recherche__filtre__list.appareils');
-  const listUstenciles = document.querySelector('.recherche__filtre__list.ustenciles');
+
   
-  var ingredientTagsArray = []; // tableaux qui contiendront tous les tags choisis
-  var applianceTagsArray = [];
-  var ustensilTagsArray = [];
   var inputSansCarSpeciaux = '';
   var globalrecherche= recipes; // tabelau de "recipes" issue de filtre  (rechercheCroisee, rechercheIngredient) , contient toutes les recettes matchant les filtre (= tout au premier chargement)
-  var globalIngredient = ''; // contendra tout les ingredients possibles : tableau d'objet, 1 objet contient les propriétés ingredient, quantity et unit
-  var globalAppliance = ''; //contiendra tout les objets possibles avec id name, servings etc et donc appliance
-  var globalUstensil = '';//contiendra tout les objets possibles avec id name, servings etc et donc ustensils
+
   // on inhibe la saisie de la touche entrée
   rechercheInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') e.preventDefault();
@@ -147,32 +140,23 @@
   rechercheInput.addEventListener('input', (e) => { //keypress ne suffit pas car ca ne se déclecnhe pas lors de l'appui sur la touche suppr
     const input = e.target.value;
     inputSansCarSpeciaux = remplaceCarSpeciaux(input); // suppr des accents et autres signes diacritiques génériques 
-    tagSection.innerHTML = '';
-    ingredientTagsArray = []; // tableaux qui contiendront tous les tags choisis
-    applianceTagsArray = [];
-    ustensilTagsArray = [];
+
+
   
     if (inputSansCarSpeciaux.length > 2) { // on verifie si plus de 2 lettres ont été saisies
       globalrecherche = rechercheCroisee(); // lancement fct qui effectue la recherche
       if (globalrecherche.length < 1) { // si aucun resultat
         resultatSection.innerHTML = `<p class='erreur-resultat'>Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc. .</p>`;
-        listIngredient.innerHTML =  listAppliance.innerHTML = listUstenciles.innerHTML = ''; // rien ne doit être porposé dans les filtres
+
       } else {
         resultatSection.innerHTML = retourneBalisesArticlesContenantRecettesTriees(globalrecherche); // trie des recettes par ordre alpha et retourne autant de balise <article que nécessaire
-        globalIngredient = globalrecherche.flatMap((element) => element.ingredients);
-        GereBlocHtmlUnFiltre(globalIngredient, 'ingredient', '', 'ingredients'); // affiche les filtres
-  
-        globalAppliance = globalrecherche;
-        GereBlocHtmlUnFiltre(globalAppliance, 'appliance', '', 'appareils');
-  
-        globalUstensil = globalrecherche;
-        GereBlocHtmlUnFiltre(globalUstensil, 'ustensils', '', 'ustenciles');
       }
     } else { // si moins de 3 lettres saisies....
       resultatSection.innerHTML = retourneBalisesArticlesContenantRecettesTriees(recipes); // trie des recettes par ordre alpha et retourne autant de balise <article que nécessaire
     }
   });
-  // au chargement de la page, on rempli les 3 filtres avec toutes les occurences possibles :
-  GereBlocHtmlUnFiltre(globalrecherche.flatMap((element) => element.ingredients), 'ingredient', '', 'ingredients'); // permet d'appliquer une fonction à chaque élément du tableau puis d'aplatir le résultat en un tableau
-  GereBlocHtmlUnFiltre(globalrecherche, 'appliance', '', 'appareils');
-  GereBlocHtmlUnFiltre(globalrecherche, 'ustensils', '', 'ustenciles');
+
+    // au chargement de la page, on rempli les 3 filtres avec toutes les occurences possibles :
+    GereBlocHtmlUnFiltre(globalrecherche.flatMap((element) => element.ingredients), 'ingredient', '', 'ingredients'); // permet d'appliquer une fonction à chaque élément du tableau puis d'aplatir le résultat en un tableau
+    GereBlocHtmlUnFiltre(globalrecherche, 'appliance', '', 'appareils');
+    GereBlocHtmlUnFiltre(globalrecherche, 'ustensils', '', 'ustenciles');

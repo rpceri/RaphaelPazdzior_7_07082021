@@ -31,6 +31,25 @@ main {
     width: 100%;
   }
 
+  &__tags {
+    height: auto;
+    margin-top: 1rem;
+    &__ingredients,  &__appareils,  &__ustenciles {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__item {
+      margin-top: 1rem;
+      border-radius: 3px;
+      padding: 0.2rem 0.8rem;
+      color: $txt-clair;
+      display: flex;
+      align-items: baseline;
+      //&:not(:last-child) { margin-right: 1rem; }
+    }
+  }
+
   &__filtre {
     display: flex;
     flex-wrap: wrap;
