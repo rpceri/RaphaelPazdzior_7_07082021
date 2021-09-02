@@ -1,5 +1,5 @@
   retourneBlocHtmlConteneurFiltre = (string) => {
-    console.log('retourneBlocHtmlConteneurFiltre')
+    //console.log('retourneBlocHtmlConteneurFiltre')
     return `
     <div class=conteneur-filtre-${string}>
       <div class="recherche__filtre__element ${string}">
@@ -23,8 +23,8 @@
   }
 
   // uitlisée par recherche.inc
-  // on va faire un taebleau d'ingrédient idem a l'original, auquel on normalise les entrée pour les comparer,
-  // si on trouve ensuit des termes emblables, on mémorise les indices pour pouvoir ensuite les supprimer du tableau original avant de le retourner
+  // on va faire un tableau d'ingrédient idem a l'original, auquel on normalise les entrées pour les comparer,
+  // si on trouve ensuite des termes semblables, on mémorise les indices pour pouvoir ensuite les supprimer du tableau original avant de le retourner
   SupprDoublonDunArray = (array) => {
     const arrayNormalise =  array.map((element) => remplaceCarSpeciaux(element));
     let tabIndicesASuppr = [];
@@ -47,7 +47,7 @@
 
     return tabFinal;
   }
-
+  
   abregUnits = (str) => {
     return str.replace('grammes', 'gr');
   }
@@ -100,7 +100,7 @@
 
 
 
-
+  //window.onload = function () { // desactive pour le moment prose problème ordonnancement sinon
   //modification du contenu des objets présents dans recipes.js :
   // première lettre des ustensils en maj
   recipes.map((element) => {
@@ -170,9 +170,11 @@
       }
     } else { // si moins de 3 lettres saisies....
       resultatSection.innerHTML = retourneBalisesArticlesContenantRecettesTriees(recipes); // trie des recettes par ordre alpha et retourne autant de balise <article que nécessaire
+      listIngredient.innerHTML =  listAppliance.innerHTML = listUstenciles.innerHTML = ''; // rien ne doit être porposé dans les filtres
     }
   });
   // au chargement de la page, on rempli les 3 filtres avec toutes les occurences possibles :
   GereBlocHtmlUnFiltre(globalrecherche.flatMap((element) => element.ingredients), 'ingredient', '', 'ingredients'); // permet d'appliquer une fonction à chaque élément du tableau puis d'aplatir le résultat en un tableau
   GereBlocHtmlUnFiltre(globalrecherche, 'appliance', '', 'appareils');
   GereBlocHtmlUnFiltre(globalrecherche, 'ustensils', '', 'ustenciles');
+//}

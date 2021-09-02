@@ -1,290 +1,311 @@
 .conteneur-principal {
-  margin: 0 5%;
-main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    margin: 0 5%;
+  main {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+  }
 }
-}
-
+  
 @media screen and (min-width: 1000px) {
-.conteneur-principal {
-  margin: 0 auto;
-  width: 100rem;
-  padding-left: 4rem;
+  .conteneur-principal {
+    margin: 0 auto;
+    width: 100rem;
+    padding-left: 4rem;
+  }
 }
-}
-
-
+  
+  
 
 .recherche {
-  width: 98%;
-  margin: 2rem 0 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  flex-direction: column;
-  &__input {
+    width: 98%;
+    margin: 2rem 0 0 0;
     display: flex;
     justify-content: center;
     align-items: baseline;
-    width: 100%;
-  }
-
-  &__tags {
-    height: auto;
-    margin-top: 1rem;
-    &__ingredients,  &__appareils,  &__ustenciles {
+    flex-direction: column;
+    &__input {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      width: 100%;
+    }
+  
+    &__tags {
+      height: auto;
+      margin-top: 1rem;
+      &__ingredients,  &__appareils,  &__ustenciles {
+        display: flex;
+        flex-wrap: wrap;
+      }
+  
+      &__item {
+        margin-top: 1rem;
+        border-radius: 3px;
+        padding: 0.2rem 0.8rem;
+        color: $txt-clair;
+        display: flex;
+        align-items: baseline;
+        //&:not(:last-child) { margin-right: 1rem; }
+      }
+    }
+  
+    &__filtre {
       display: flex;
       flex-wrap: wrap;
+      margin-top: 2rem;
+      justify-content: flex-start;
+      position: relative;
+      width: 100%;
+  
+      &__element {
+        cursor: pointer;
+        width: 12rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        color: $txt-clair;
+        height: 5rem;
+        border-radius: 3px;
+        transition: width 0.1s ease;
+        &:hover, &:focus  { opacity: 1; }
+        &.visible {
+          width: 100%;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+      }
+  
+      &__input {
+        opacity: 0;
+        font-size: 1.3rem;
+        border: none;
+        visibility: hidden;
+        display: block;
+        height: 5rem;
+        border-radius: 3px;
+        width: 100%;
+        outline: none;
+        color: $txt-clair;
+        ::placeholder {
+          opacity: 1;
+        }
+      }
+      &__label {
+        color: $txt-clair;
+        width: 5rem;
+        opacity: 1;
+        visibility: visible;
+        text-transform: capitalize;
+      }
+      &__list {
+        width: 12rem;
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        border-radius: 0 0 3px 3px;
+        padding: 1rem 1rem;
+        top: 100%;
+        transition: all 0.1s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 2;
+  
+        &__item {
+          flex-basis: 33%;
+          position: relative;
+          margin-bottom: 0.2rem;
+          display: block;
+          color: $txt-clair;
+          text-align: left;
+          transition: all 0.1s;
+          &:hover {
+            font-weight: 600;
+            cursor: pointer;
+          }
+          &:focus {
+            font-weight: 600;
+          }
+          &__erreur {
+            color: $txt-clair;
+            cursor: default;
+            list-style: none;
+          }
+        }
+      }
     }
-
-    &__item {
-      margin-top: 1rem;
-      border-radius: 3px;
-      padding: 0.2rem 0.8rem;
-      color: $txt-clair;
-      display: flex;
-      align-items: baseline;
-      //&:not(:last-child) { margin-right: 1rem; }
+  } // fin recherche
+  
+  .conteneur-filtre-ingredients,  .conteneur-filtre-appareils, .conteneur-filtre-ustenciles {
+    width: auto;
+    transition: width 0.1s ease;
+  }
+  
+  .larger {
+    width: 40%;
+    margin-right: 1rem;
+  }
+  
+  .recherche__filtre__element.visible ~ .recherche__filtre__list {
+    opacity: 1;
+    visibility: visible;
+    width: 40%;
+  }
+  
+  .recherche__filtre__element.visible > .recherche__filtre__input {
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+    &::placeholder {
+      text-transform: capitalize;
     }
   }
-
-  &__filtre {
+  
+  .recherche__filtre__element.visible > .recherche__filtre__label {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+  }
+  
+  .recherche__filtre__element.visible > .bt-affiche-ou-masque {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    right: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .fas.fa-search {
+    font-size: 2rem;
+    position: relative;
+    align-self: center;
+    right: 4rem;
+  }
+  
+  .far.fa-times-circle {
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .ingredients { background-color: $fond-bouton-ingredients; }
+  .appareils { background-color: $fond-bouton-appareils; }
+  .ustenciles { background-color: $fond-bouton-ustenciles; }
+  
+  ////////////////////////////
+  .resultat {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 2rem;
     justify-content: flex-start;
-    position: relative;
-    width: 100%;
+    margin: 1rem -1rem 0 -1rem;
+  }
+  
+  .erreur-resultat {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+  }
 
-    &__element {
-      cursor: pointer;
-      width: 12rem;
-      position: relative;
+  //////////////////////////
+  .bt-affiche-ou-masque {
+    position: relative;
+    height: 10px;
+    width: 10px;
+    margin-left: -2.5rem;
+  }
+  .bt-affiche-ou-masque::before,
+  .bt-affiche-ou-masque::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 0.15rem;
+    height: 100%;
+   // transition: all 0.25s;
+  }
+  .bt-affiche-ou-masque::after {
+    left: -2.5px;
+    transform: rotate(-45deg);
+    background-color: $txt-clair;
+  }
+  .bt-affiche-ou-masque::before {
+    left: 4.5px;
+    transform: rotate(45deg);
+    background-color: $txt-clair;
+  }
+  .visible .bt-affiche-ou-masque::after {
+    left: -2.5px;
+    transform: rotate(45deg);
+  }
+  .visible .bt-affiche-ou-masque::before {
+    left: 4.5px;
+    transform: rotate(-45deg);
+  }
+  
+
+  /////// fiche-recette
+  .fiche-recette {
+  width: 35rem;
+  min-height: 28rem;
+  border-radius: 3px;
+  flex-basis: 30%; // détermine la base de flexibilité utilisée comme taille initiale principale pour un élément flexible.
+  background-color: $fond-bloc-recette;
+  margin: 1rem;
+
+  &__image {
+    width: 100%;
+    min-height: 10rem;
+    background-color: $fond-bloc-recette2;
+  }
+
+  &__info {
+    padding: 0 1rem 0rem 1rem;
+ 
+    display: flex;
+    flex-direction: column;
+
+    &__first-element {
+      margin-bottom: 1rem;
+      width: 100%;
+      min-height: 4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 10px;
-      color: $txt-clair;
-      height: 5rem;
-      border-radius: 3px;
-      &:hover, &:focus  { opacity: 1; }
-      &.visible {
-        width: 100%;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-      &:not(:last-child) {
-        margin-right: 1rem;
-      }
-    }
 
-    &__input {
-      opacity: 0;
-      font-size: 1.3rem;
-      border: none;
-      visibility: hidden;
-      display: block;
-      height: 5rem;
-      border-radius: 3px;
-      width: 100%;
-      outline: none;
-      color: $txt-clair;
-      ::placeholder {
-        opacity: 1;
+      &__nom-recette {
+        font-weight: 400;
+        font-size: 1.4rem;
+        max-width: 70%;
+      }
+      &__temps {
+        font-weight: 600;
       }
     }
-    &__label {
-      color: $txt-clair;
-      width: 5rem;
-      opacity: 1;
-      visibility: visible;
-      text-transform: capitalize;
-    }
-    &__list {
-      width: 12rem;
-      position: absolute;
+    &__second-element {
+      width: 100%;
       display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
-      border-radius: 0 0 3px 3px;
-      padding: 1rem 1rem;
-      top: 100%;
-
-      opacity: 0;
-      visibility: hidden;
-      z-index: 2;
-
-      &__item {
-        flex-basis: 33%;
-        position: relative;
-        margin-bottom: 0.2rem;
-        display: block;
-        color: $txt-clair;
-        text-align: left;
-        &:hover {
-          font-weight: 600;
-          cursor: pointer;
-        }
-        &:focus {
-          font-weight: 600;
-        }
-        &__erreur {
-          color: $txt-clair;
-          cursor: default;
-          list-style: none;
-        }
+      font-size: 1rem;
+      line-height: 1.3;
+      &__ingredients {
+        white-space: nowrap; // a voir si on laisse
+        flex-basis: 50%;
+        padding-right: 4px;
+      }
+      &__instructions {
+        font-family: 'Roboto', sans-serif;
+        font-size:0.97em;
+        flex-basis: 50%;     
+        max-height: 9rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 7; //permet de limiter l'affichage du contenu d'un bloc à un nombre donné de lignes
+        overflow: hidden;
       }
     }
   }
-} // fin recherche
-
-.conteneur-filtre-ingredients,  .conteneur-filtre-appareils, .conteneur-filtre-ustenciles {
-  width: auto;
-}
-
-.larger {
-  width: 40%;
-  margin-right: 1rem;
-}
-
-.recherche__filtre__element.visible ~ .recherche__filtre__list {
-  opacity: 1;
-  visibility: visible;
-  width: 40%;
-}
-
-.recherche__filtre__element.visible > .recherche__filtre__input {
-  opacity: 1;
-  visibility: visible;
-  width: 100%;
-  &::placeholder {
-    text-transform: capitalize;
-  }
-}
-
-.recherche__filtre__element.visible > .recherche__filtre__label {
-  opacity: 0;
-  visibility: hidden;
-  width: 0;
-}
-
-.recherche__filtre__element.visible > .bt-affiche-ou-masque {
-  position: absolute;
-  height: 10px;
-  width: 10px;
-  right: 1rem;
-  margin-left: 1rem;
-}
-
-.fas.fa-search {
-  font-size: 2rem;
-  position: relative;
-  align-self: center;
-  right: 4rem;
-}
-
-.far.fa-times-circle {
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-
-.ingredients { background-color: $fond-bouton-ingredients; }
-.appareils { background-color: $fond-bouton-appareils; }
-.ustenciles { background-color: $fond-bouton-ustenciles; }
-
-////////////////////////////
-.resultat {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin: 1rem -1rem 0 -1rem;
-}
-
-.erreur-resultat {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  font-size: 1.4rem;
-}
-
-//////////////////////////
-.bt-affiche-ou-masque {
-  position: relative;
-  height: 10px;
-  width: 10px;
-  margin-left: -2.5rem;
-}
-.bt-affiche-ou-masque::before,
-.bt-affiche-ou-masque::after {
-  content: '';
-  position: absolute;
-  bottom: 0px;
-  width: 0.15rem;
-  height: 100%;
-}
-
-
-
-/////// fiche-recette
-.fiche-recette {
-width: 35rem;
-min-height: 28rem;
-border-radius: 3px;
-flex-basis: 30%; // détermine la base de flexibilité utilisée comme taille initiale principale pour un élément flexible.
-background-color: $fond-bloc-recette;
-margin: 1rem;
-
-&__image {
-  width: 100%;
-  min-height: 10rem;
-  background-color: $fond-bloc-recette2;
-}
-
-&__info {
-  padding: 0 1rem 0rem 1rem;
-
-  display: flex;
-  flex-direction: column;
-
-  &__first-element {
-    margin-bottom: 1rem;
-    width: 100%;
-    min-height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &__nom-recette {
-      font-weight: 400;
-      font-size: 1.4rem;
-      max-width: 70%;
-    }
-    &__temps {
-      font-weight: 600;
-    }
-  }
-  &__second-element {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 1rem;
-    line-height: 1.3;
-    &__ingredients {
-      white-space: nowrap; // a voir si on laisse
-      flex-basis: 50%;
-      padding-right: 4px;
-    }
-    &__instructions {
-      font-family: 'Roboto', sans-serif;
-      font-size:0.97em;
-      flex-basis: 50%;     
-      max-height: 9rem;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 7; //permet de limiter l'affichage du contenu d'un bloc à un nombre donné de lignes
-      overflow: hidden;
-    }
-  }
-}
 }
