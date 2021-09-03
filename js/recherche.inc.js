@@ -5,9 +5,21 @@ rechercheCroisee = () => {
   //console.log('rechercheCroisee');
 
   const rechercheByName = recipes.filter((element) => { // filter pour ne sortir que les name d'element contenant inputSansCarSpeciaux  = chaine recherchée
-    return remplaceCarSpeciaux(element.name).includes(inputSansCarSpeciaux); // remplaceCarSpeciaux suppr des accents et autres signes diacritiques génériques
-  });
-
+    //return remplaceCarSpeciaux(element.name).includes(inputSansCarSpeciaux); // remplaceCarSpeciaux suppr des accents et autres signes diacritiques génériques
+    const arrayInputSansCarSpeciaux = inputSansCarSpeciaux.split(' ');
+    var correspond = true;
+    for (const posIndex in arrayInputSansCarSpeciaux) {
+        //console.log(arrayInputSansCarSpeciaux[posIndex] + ' :' + element.nameNormalise + ' =' +element.nameNormalise.indexOf(arrayInputSansCarSpeciaux[posIndex]) )
+        // verifie si l'élément courant du 1er tableau n'a pas déjà été traité (auquel cas il est vide), auqel cas on vérifie si l'element courant du 2d tabelau n'est pas sembllable, à partir de l'indice au dessus
+        if(element.nameNormalise.indexOf(arrayInputSansCarSpeciaux[posIndex]) === -1) {
+          correspond = false;
+          break;
+        }
+    }
+    return correspond
+   });
+  // rechercheByName est un tabelau d'objet
+  
   //filtre par "ingrédient"
   // pour chaque element, on va vérifier les ingredients qui matches
   //cela retournee un tableau avec les ingredients qui correspondent, ex si 2 correspondent : Array [ "Lait de coco", "Crème de coco" ]
