@@ -102,8 +102,12 @@
 
   //window.onload = function () { // desactive pour le moment prose problème ordonnancement sinon
   //modification du contenu des objets présents dans recipes.js :
-  // première lettre des ustensils en maj
   recipes.map((element) => {
+      // création d'une propriété supplémentaire dans chaque element de recipes pour avoir les name normalisé (sasna ccent ni maj)
+      let nameNormalise = remplaceCarSpeciaux(element.name);
+      element.nameNormalise =  nameNormalise;    
+    
+    // première lettre des ustensils en maj, pour homogénéhiser, impacte visuel seulement
     for (let i = 0; i < element.ustensils.length; i++) {
       let modif = element.ustensils[i].charAt(0).toUpperCase() + element.ustensils[i].slice(1);
       element.ustensils[i] =  modif;    
@@ -134,7 +138,7 @@
   var applianceTagsArray = [];
   var ustensilTagsArray = [];
   var inputSansCarSpeciaux = '';
-  var globalrecherche= recipes; // tabelau de "recipes" issue de filtre  (rechercheCroisee, rechercheIngredient) , contient toutes les recettes matchant les filtre (= tout au premier chargement)
+  var globalrecherche = recipes; // tableau de "recipes" issue de filtre (rechercheCroisee, rechercheIngredient), contient toutes les recettes matchant les filtres (= tout au premier chargement)
   var globalIngredient = ''; // contendra tout les ingredients possibles : tableau d'objet, 1 objet contient les propriétés ingredient, quantity et unit
   var globalAppliance = ''; //contiendra tout les objets possibles avec id name, servings etc et donc appliance
   var globalUstensil = '';//contiendra tout les objets possibles avec id name, servings etc et donc ustensils

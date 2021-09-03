@@ -3,14 +3,15 @@
 rechercheCroisee = () => {
   //filtre par "name"
   //console.log('rechercheCroisee');
+
   const rechercheByName = recipes.filter((element) => { // filter pour ne sortir que les name d'element contenant inputSansCarSpeciaux  = chaine recherchée
     return remplaceCarSpeciaux(element.name).includes(inputSansCarSpeciaux); // remplaceCarSpeciaux suppr des accents et autres signes diacritiques génériques
   });
-  
+
   //filtre par "ingrédient"
   // pour chaque element, on va vérifier les ingredients qui matches
   //cela retournee un tableau avec les ingredients qui correspondent, ex si 2 correspondent : Array [ "Lait de coco", "Crème de coco" ]
-  // SI PAS DE CORRESPONDANCe pour 1 recette, il y a quand meme un tabelau vide
+  // SI PAS DE CORRESPONDANCE pour 1 recette, il y a quand meme un tabelau vide
   const recipesIngredients = recipes.map((element) => {
     const  ingredients  = element.ingredients; // equivalent :  const { ingredients } = element; retourn un tabl d'objet, ex : Object { ingredient: "Vin blanc sec", quantity: 30, unit: "cl" }
     const allIngredient = ingredients.map((el) => el.ingredient); // map() crée un nouveau tableau avec les résultats de l'appel d'une fonction fournie sur chaque élément du tableau appelant.
@@ -48,7 +49,8 @@ rechercheCroisee = () => {
   //suppr des doublons :
   const resultatRechercheConcateneeGroupees = [...new Set(resultatRechercheConcatenee)];  //L'objet Set (Ensemble en fr) permet de stocker des valeurs uniques, de n'importe quel type, que ce soit des valeurs d'un type primitif ou des objets.
   // nb : Set converti un tableau en ensemble, le fait de mettre .... fait la manip inverse (conversion  de l'ensemble en tableau)
-  return resultatRechercheConcateneeGroupees.sort();// retourne un tableau d'objet des recettes qui matchent, trié par ordre alpha
+  // resultatRechercheConcateneeGroupees est un tabelau d'objet
+  return resultatRechercheConcateneeGroupees.sort();// retourne un tableau d'objet des recettes qui matchent, triées par ordre alpha
 } // rechercheCroisee
 
 // affiche les filtres

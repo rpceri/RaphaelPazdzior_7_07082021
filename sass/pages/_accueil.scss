@@ -191,6 +191,10 @@
   .far.fa-times-circle {
     margin-left: 0.5rem;
     cursor: pointer;
+    color:$txt-clair;
+  }
+  .far.fa-times-circle:hover {
+    color:$txt-survol;
   }
   
   .ingredients { background-color: $fond-bouton-ingredients; }
