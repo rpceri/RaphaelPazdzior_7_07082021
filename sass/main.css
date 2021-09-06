@@ -85,6 +85,10 @@ input {
   border: none;
   outline: #ce5052;
   font-size: 1.4rem;
+  /*
+  &:focus {
+    outline: 2px solid $outline;
+  }*/
 }
 
 input::-webkit-input-placeholder {
@@ -117,10 +121,6 @@ input::placeholder {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-input:focus {
-  outline: 2px solid #ce5052;
 }
 
 .conteneur-principal {
@@ -211,7 +211,6 @@ input:focus {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-top: 2rem;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -220,6 +219,7 @@ input:focus {
 }
 
 .recherche__filtre__element {
+  margin-top: 1rem;
   cursor: pointer;
   width: 12rem;
   position: relative;
@@ -242,12 +242,6 @@ input:focus {
 
 .recherche__filtre__element:hover, .recherche__filtre__element:focus {
   opacity: 1;
-}
-
-.recherche__filtre__element.visible {
-  width: 100%;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 .recherche__filtre__element:not(:last-child) {
@@ -433,6 +427,9 @@ input:focus {
       -ms-flex-pack: start;
           justify-content: flex-start;
   margin: 1rem -1rem 0 -1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .erreur-resultat {
@@ -484,11 +481,10 @@ input:focus {
 }
 
 .fiche-recette {
-  width: 35rem;
   min-height: 28rem;
   border-radius: 3px;
-  -ms-flex-preferred-size: 30%;
-      flex-basis: 30%;
+  -ms-flex-preferred-size: 30rem;
+      flex-basis: 30rem;
   background-color: #e7e7e7;
   margin: 1rem;
 }

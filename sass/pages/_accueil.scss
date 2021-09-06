@@ -53,12 +53,12 @@
     &__filtre {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 2rem;
       justify-content: flex-start;
       position: relative;
       width: 100%;
   
       &__element {
+        margin-top: 1rem;
         cursor: pointer;
         width: 12rem;
         position: relative;
@@ -72,9 +72,7 @@
         transition: width 0.1s ease;
         &:hover, &:focus  { opacity: 1; }
         &.visible {
-          width: 100%;
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
+          //width: 100%;
         }
         &:not(:last-child) {
           margin-right: 1rem;
@@ -207,6 +205,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: 1rem -1rem 0 -1rem;
+    justify-content: center
   }
   
   .erreur-resultat {
@@ -253,10 +252,10 @@
 
   /////// fiche-recette
   .fiche-recette {
-  width: 35rem;
+  //width: 35rem;
   min-height: 28rem;
   border-radius: 3px;
-  flex-basis: 30%; // détermine la base de flexibilité utilisée comme taille initiale principale pour un élément flexible.
+  flex-basis: 30rem; // 30 rem détermine la base de flexibilité utilisée comme taille initiale principale pour un élément flexible.
   background-color: $fond-bloc-recette;
   margin: 1rem;
 

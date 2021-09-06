@@ -4,19 +4,21 @@ rechercheCroisee = () => {
   //filtre par "name"
   //console.log('rechercheCroisee');
 
-  const rechercheByName = recipes.filter((element) => { // filter pour ne sortir que les name d'element contenant inputSansCarSpeciaux  = chaine recherchée
-    //return remplaceCarSpeciaux(element.name).includes(inputSansCarSpeciaux); // remplaceCarSpeciaux suppr des accents et autres signes diacritiques génériques
+  const rechercheByName = recipes.filter((element) => { // filter pour ne sortir que les recettes dont le nom contient inputSansCarSpeciaux (inputSansCarSpeciaux : saisie de l'utilisateur)
+    //v1 :
+    //return remplaceCarSpeciaux(element.name).includes(inputSansCarSpeciaux); // retient les recettes dont le nom contient la saisie
+    
+    //v2 :
+    // boucle permettant de retenir les recettes dont le nom contient chacun des mot de la saisie
     const arrayInputSansCarSpeciaux = inputSansCarSpeciaux.split(' ');
     var correspond = true;
     for (const posIndex in arrayInputSansCarSpeciaux) {
-        //console.log(arrayInputSansCarSpeciaux[posIndex] + ' :' + element.nameNormalise + ' =' +element.nameNormalise.indexOf(arrayInputSansCarSpeciaux[posIndex]) )
-        // verifie si l'élément courant du 1er tableau n'a pas déjà été traité (auquel cas il est vide), auqel cas on vérifie si l'element courant du 2d tabelau n'est pas sembllable, à partir de l'indice au dessus
         if(element.nameNormalise.indexOf(arrayInputSansCarSpeciaux[posIndex]) === -1) {
           correspond = false;
           break;
         }
     }
-    return correspond
+    return correspond;
    });
   // rechercheByName est un tabelau d'objet
   
